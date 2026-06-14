@@ -203,9 +203,9 @@
       try { localStorage.setItem("mostai.navPos2", target.id); } catch (e) {}
     }
 
-    /* Restore saved position (default top-right so the collapsed orb never sits on centered headings) */
-    var savedPos = "tr";
-    try { savedPos = localStorage.getItem("mostai.navPos2") || "tr"; } catch (e) {}
+    /* Restore saved position (default top-center; the orb is draggable to any corner) */
+    var savedPos = "tc";
+    try { savedPos = localStorage.getItem("mostai.navPos2") || "tc"; } catch (e) {}
     var targets = getSnapTargets();
     var restoreTarget = targets.find(function (t) { return t.id === savedPos; }) || targets[0];
     snapOrbTo(restoreTarget, false);
@@ -255,8 +255,8 @@
 
     addEventListener("resize", function () {
       if (!isCollapsed) return;
-      var sp = "tr";
-      try { sp = localStorage.getItem("mostai.navPos2") || "tr"; } catch (e) {}
+      var sp = "tc";
+      try { sp = localStorage.getItem("mostai.navPos2") || "tc"; } catch (e) {}
       var t = getSnapTargets().find(function (s) { return s.id === sp; }) || getSnapTargets()[0];
       snapOrbTo(t, false);
     });

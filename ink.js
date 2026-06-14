@@ -101,7 +101,7 @@
     "precision highp float; varying vec2 vUv;" +
     "uniform sampler2D uPrev; uniform float uTime; uniform float uDecay;" +
     "uniform vec2 uPointer; uniform float uSplat; uniform vec3 uColor; uniform float uAspect;" +
-    "uniform float uTurb; uniform float uInt; uniform float uRectN; uniform vec4 uRects[8];" +
+    "uniform float uTurb; uniform float uInt;" +
     "vec2 hash2(vec2 p){ p=vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3))); return -1.0+2.0*fract(sin(p)*43758.5453); }" +
     "float noise(vec2 p){ vec2 i=floor(p),f=fract(p); vec2 u=f*f*(3.0-2.0*f);" +
     "return mix(mix(dot(hash2(i+vec2(0.0,0.0)),f-vec2(0.0,0.0)),dot(hash2(i+vec2(1.0,0.0)),f-vec2(1.0,0.0)),u.x)," +
@@ -111,23 +111,21 @@
     " + 0.5*noise(p*6.0-vec2(uTime*0.04,0.0))" +
     " + 0.25*noise(p*12.0+vec2(uTime*0.03,uTime*0.02)); }" +
     "vec2 curl(vec2 p){ float e=0.0022; return vec2(pot(p+vec2(0.0,e))-pot(p-vec2(0.0,e)), -(pot(p+vec2(e,0.0))-pot(p-vec2(e,0.0))))/(2.0*e); }" +
-    "void main(){ vec2 uv=vUv;" +
-    /* ---- text-avoidance: ink fades fast + injects little inside text rects, and slides away ---- */
-    "float avoid=0.0; vec2 away=vec2(0.0);" +
-    "for(int i=0;i<8;i++){ if(float(i)>=uRectN) break; vec4 r=uRects[i]; vec2 dd=uv-r.xy; vec2 q=abs(dd)-r.zw;" +
-    "float sd=length(max(q,0.0))+min(max(q.x,q.y),0.0); float m=1.0-smoothstep(0.0,0.06,sd);" +
-    "if(m>avoid) avoid=m; away+=normalize(dd+vec2(0.0001))*m; }" +
-    "vec2 v=curl(uv)*(0.00085*uTurb);" +
-    "v+=normalize(away+vec2(0.00001))*avoid*(0.0020*uTurb);" +              /* gentle slide off the text */
-    "vec3 prev=texture2D(uPrev, uv - v).rgb; prev*=mix(uDecay, uDecay*0.86, avoid);" + /* fade faster over text */
-    "vec2 d=(uv-uPointer); d.x*=uAspect; float blob=exp(-dot(d,d)/0.0021)*uSplat*(1.0-0.96*avoid);" + /* inject little on text */
-    "vec3 col=prev + uColor*blob*uInt;" +
+    "void main(){ vec2 uv=vUv; vec2 v=curl(uv)*(0.00085*uTurb); vec3 prev=texture2D(uPrev, uv - v).rgb; prev*=uDecay;" +
+    "vec2 d=(uv-uPointer); d.x*=uAspect; float blob=exp(-dot(d,d)/0.0021)*uSplat; vec3 col=prev + uColor*blob*uInt;" +
     "gl_FragColor=vec4(min(col,vec3(1.5)),1.0); }";
 
   var SHOW =
     "precision highp float; varying vec2 vUv;" +
-    "uniform sampler2D uDye; uniform vec3 uBg;" +
-    "void main(){ vec3 dye=texture2D(uDye,vUv).rgb; vec3 col=uBg+dye;" +
+    "uniform sampler2D uDye; uniform vec3 uBg; uniform float uRectN; uniform vec4 uRects[8];" +
+    "void main(){ vec3 dye=texture2D(uDye,vUv).rgb;" +
+    /* the ink still flows over the text — we just render it lighter there so the words stay readable */
+    "float soft=0.0;" +
+    "for(int i=0;i<8;i++){ if(float(i)>=uRectN) break; vec4 r=uRects[i]; vec2 dd=vUv-r.xy; vec2 q2=abs(dd)-r.zw;" +
+    "float sd=length(max(q2,0.0))+min(max(q2.x,q2.y),0.0); float m=1.0-smoothstep(0.0,0.07,sd);" +
+    "if(m>soft) soft=m; }" +
+    "dye*=mix(1.0, 0.45, soft);" +
+    "vec3 col=uBg+dye;" +
     "vec2 q=vUv-0.5; float vig=smoothstep(1.05,0.2,length(q)); col*=mix(0.82,1.0,vig);" +
     "gl_FragColor=vec4(col,1.0); }";
 
@@ -247,7 +245,7 @@
   window.addEventListener("resize", resize);
 
   /* ---- text-avoidance: feed the live on-screen text rectangles into the sim ---- */
-  var AVOID_SEL = ".hero .eyebrow, .hero h1, .hero .hero__sub, .hero .hero__meta, .phead .eyebrow, .phead h1, .phead p, .ink h2, .ink p, .tools__label";
+  var AVOID_SEL = ".hero .eyebrow, .hero h1, .hero .hero__sub, .hero .hero__meta, .builds__lead, .builds__list li, .phead .eyebrow, .phead h1, .phead p, .ink h2, .ink p, .tools__label";
   var rectBuf = new Float32Array(32);   // up to 8 rects × vec4(cx, cy, halfW, halfH) in 0..1, y bottom-up
   var rectCount = 0;
   function updateAvoid() {
@@ -278,10 +276,10 @@
     aspect: gl.getUniformLocation(updateP, "uAspect"),
     turb: gl.getUniformLocation(updateP, "uTurb"),
     intensity: gl.getUniformLocation(updateP, "uInt"),
-    rectN: gl.getUniformLocation(updateP, "uRectN"),
-    rects: gl.getUniformLocation(updateP, "uRects[0]"),
     dye: gl.getUniformLocation(showP, "uDye"),
     bg: gl.getUniformLocation(showP, "uBg"),
+    rectN: gl.getUniformLocation(showP, "uRectN"),
+    rects: gl.getUniformLocation(showP, "uRects[0]"),
   };
 
   document.addEventListener("visibilitychange", function () {
@@ -315,9 +313,6 @@
     gl.uniform1f(u.aspect, aspectU);
     gl.uniform1f(u.turb, state.turbulence);
     gl.uniform1f(u.intensity, state.intensity);
-    updateAvoid();
-    gl.uniform1f(u.rectN, rectCount);
-    gl.uniform4fv(u.rects, rectBuf);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     pointer.strength *= 0.86;
 
@@ -331,6 +326,9 @@
     gl.uniform1i(u.dye, 0);
     var bg = bgColor();
     gl.uniform3f(u.bg, bg[0], bg[1], bg[2]);
+    updateAvoid();
+    gl.uniform1f(u.rectN, rectCount);
+    gl.uniform4fv(u.rects, rectBuf);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
 
     var tmp = a; a = b; b = tmp; // swap
