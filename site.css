@@ -185,6 +185,25 @@ img { display: block; max-width: 100%; }
 }
 .hero__meta b { color: #fff; font-weight: 600; }
 .hero__meta .sep { display: none; }
+
+/* Hero benefits — clean responsive grid (replaces the old meta pills) */
+.hero__builds { margin-top: 46px; width: 100%; }
+.hero__builds-lead { font-family: var(--font-head); font-weight: 600; font-size: clamp(17px, 2.1vw, 22px);
+  letter-spacing: -.01em; color: var(--d-text-2); text-align: center; margin: 0 0 20px; }
+.hero__builds-lead .builds__dash { color: var(--site-accent); }
+.hero__builds-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 0 auto; }
+.hbuild { display: flex; gap: 12px; align-items: flex-start; text-align: left;
+  padding: 18px; border-radius: 16px;
+  background: rgba(255,255,255,.045);
+  backdrop-filter: blur(20px) saturate(150%); -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 8px 26px -12px rgba(0,0,0,.45);
+  transition: transform .4s cubic-bezier(.2,.7,.3,1), border-color .4s, background .4s; }
+.hbuild:hover { transform: translateY(-4px); border-color: rgba(95,176,255,.3); background: rgba(255,255,255,.07); }
+.hbuild__ic { flex: none; width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; margin-top: 1px;
+  background: rgba(10,132,255,.16); border: 1px solid rgba(95,176,255,.32); color: var(--site-accent); }
+.hbuild__ic svg { width: 15px; height: 15px; }
+.hbuild p { margin: 0; font-family: var(--font-head); font-weight: 500; font-size: 15px; line-height: 1.45; color: var(--d-text); }
 .hero__mark { width: 88px; height: 77px; margin: 0 auto; object-fit: contain;
   filter: drop-shadow(0 10px 40px rgba(95,176,255,.45)); }
 
@@ -670,6 +689,7 @@ img { display: block; max-width: 100%; }
   .hero__meta { margin-top: 28px; gap: 8px; }
   .hero__meta > span:not(.sep) { padding: 8px 13px; font-size: 12px; }
   .hero__mark { width: 60px; height: 53px; }
+  .hero__builds { margin-top: 32px; }
   .hero__inner::before { top: 54px; width: 240px; height: 240px; }
   .phead { padding: 124px 0 44px; }
   .phead h1 { font-size: clamp(28px, 8.4vw, 40px); }

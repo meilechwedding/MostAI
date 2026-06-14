@@ -245,7 +245,7 @@
   window.addEventListener("resize", resize);
 
   /* ---- text-avoidance: feed the live on-screen text rectangles into the sim ---- */
-  var AVOID_SEL = ".hero .eyebrow, .hero h1, .hero .hero__sub, .hero .hero__meta, .builds__lead, .builds__list li, .phead .eyebrow, .phead h1, .phead p, .ink h2, .ink p, .tools__label";
+  var AVOID_SEL = ".hero .eyebrow, .hero h1, .hero .hero__sub, .hero__builds-lead, .hero__builds-grid, .phead .eyebrow, .phead h1, .phead p, .ink h2, .ink p, .tools__label";
   var rectBuf = new Float32Array(32);   // up to 8 rects × vec4(cx, cy, halfW, halfH) in 0..1, y bottom-up
   var rectCount = 0;
   function updateAvoid() {
