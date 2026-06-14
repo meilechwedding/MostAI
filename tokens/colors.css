@@ -1,0 +1,128 @@
+/* ============================================================
+   MostAI — Color tokens
+   ------------------------------------------------------------
+   White base, ink text, and one confident accent: Azure.
+   Azure is the recognizable thread through everything.
+   ============================================================ */
+
+:root {
+  /* ---- Brand primitives (from the Brand Foundation) ------ */
+
+  /* Ink — the brand near-black */
+  --ink:    #0C1116;
+  --ink-2:  #3A434F;   /* secondary text */
+  --mute:   #6B7585;   /* muted text */
+
+  /* Lines & soft surfaces */
+  --line:    #E7EAF0;
+  --line-2:  #F0F2F7;
+  --white:   #FFFFFF;
+  --tint:    #F5F8FE;   /* section fills */
+  --tint-2:  #EFF6FE;   /* soft azure fills */
+
+  /* Azure — the anchor accent + a working ramp */
+  --azure-50:  #EFF6FE;
+  --azure-100: #DCEBFF;
+  --azure-200: #B9D6FF;
+  --azure-300: #8FC0FF;
+  --azure-400: #5FB0FF;   /* "Sky" — light accent */
+  --azure-500: #0A84FF;   /* "Azure" — anchor */
+  --azure-600: #0869CC;   /* "Azure deep" */
+  --azure-700: #064E99;
+  --azure-800: #073B73;
+
+  /* Named brand aliases */
+  --azure:   var(--azure-500);
+  --azure-d: var(--azure-600);
+  --sky:     var(--azure-400);
+  --indigo:  #5B7BFF;
+
+  /* Extended palette (room to grow) */
+  --indigo-deep: #3D5AFE;
+  --cyan:        #22D3EE;
+  --violet:      #7C9BFF;
+
+  /* Functional */
+  --green-500: #1FA971;
+  --red-500:   #E5484D;
+  --amber-500: #F0A020;
+
+  /* ---- Gradients ----------------------------------------- */
+  --grad-primary:    linear-gradient(135deg, #0A84FF, #5FB0FF); /* @kind color */
+  --grad-futuristic: linear-gradient(120deg, #0A84FF, #5B7BFF 55%, #7C9BFF); /* @kind color */
+  --grad-glow:       radial-gradient(circle at 50% 0%, rgba(10,132,255,.6), transparent 70%); /* @kind color */
+
+  /* ---- Semantic aliases ---------------------------------- */
+
+  /* Surfaces */
+  --bg:              var(--white);
+  --surface:         var(--white);
+  --surface-muted:   var(--tint);
+  --surface-sunken:  var(--tint-2);
+  --surface-inverse: var(--ink);
+  --surface-accent:  var(--tint-2);
+
+  /* Text */
+  --text-primary:    var(--ink);
+  --text-secondary:  var(--ink-2);
+  --text-muted:      var(--mute);
+  --text-faint:      #98A1B0;
+  --text-inverse:    var(--white);
+  --text-on-accent:  var(--white);
+  --text-link:       var(--azure-600);
+
+  /* Accent */
+  --accent:          var(--azure-500);
+  --accent-hover:    var(--azure-600);
+  --accent-press:    var(--azure-700);
+  --accent-soft:     var(--tint-2);
+  --accent-border:   var(--azure-200);
+  --on-accent:       var(--white);
+
+  /* Lines & borders */
+  --border:          var(--line);
+  --border-strong:   #D6DBE4;
+  --border-faint:    var(--line-2);
+  --border-inverse:  rgba(255, 255, 255, 0.12);
+  --hairline:        rgba(12, 17, 22, 0.07);
+
+  /* Focus ring */
+  --ring:            var(--azure-400);
+  --ring-offset:     var(--white);
+
+  /* Status */
+  --success:         var(--green-500);
+  --danger:          var(--red-500);
+  --warning:         var(--amber-500);
+}
+
+/* ---- Dark / ink surface scope -------------------------------
+   Apply [data-theme="ink"] (or .on-ink) for bold ink sections.
+   Azure stays the accent; it reads beautifully on ink. */
+[data-theme="ink"],
+.on-ink {
+  --bg:              var(--ink);
+  --surface:         #141A22;
+  --surface-muted:   #141A22;
+  --surface-sunken:  #0A0E13;
+  --surface-inverse: var(--white);
+
+  --text-primary:    var(--white);
+  --text-secondary:  #C4CCD8;
+  --text-muted:      #8A93A3;
+  --text-faint:      #6B7585;
+  --text-inverse:    var(--ink);
+
+  --accent:          var(--azure-500);
+  --accent-hover:    var(--azure-400);
+  --accent-soft:     rgba(10, 132, 255, 0.16);
+  --accent-border:   rgba(95, 176, 255, 0.30);
+
+  --border:          rgba(255, 255, 255, 0.10);
+  --border-strong:   rgba(255, 255, 255, 0.18);
+  --border-faint:    rgba(255, 255, 255, 0.06);
+  --hairline:        rgba(255, 255, 255, 0.08);
+
+  --ring:            var(--azure-400);
+  --ring-offset:     var(--ink);
+}

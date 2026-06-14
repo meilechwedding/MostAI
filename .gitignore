@@ -1,0 +1,7 @@
+# dev / OS artifacts
+screenshots/
+.claude/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log

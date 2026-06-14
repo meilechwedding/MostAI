@@ -1,0 +1,79 @@
+/* ============================================================
+   mostai — Base layer
+   Light reset + element defaults + a few brand utilities used
+   across specimen cards and UI kits.
+   ============================================================ */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-tight);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+  color: var(--text-primary);
+  text-wrap: balance;
+}
+
+p { margin: 0; text-wrap: pretty; }
+
+a { color: var(--text-link); text-decoration: none; }
+
+::selection { background: var(--azure-200); color: var(--ink); }
+
+/* ---- Brand utilities ------------------------------------- */
+
+.mos-eyebrow {
+  font-family: var(--font-eyebrow);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* The MostAI wordmark rendered in CSS — Michroma, with "AI" in Azure.
+   Markup: <span class="mos-wordmark">Most<b>AI</b></span> */
+.mos-wordmark {
+  font-family: var(--wordmark-font);
+  font-weight: var(--wordmark-weight);
+  letter-spacing: var(--wordmark-tracking);
+  color: var(--text-primary);
+}
+.mos-wordmark b { color: var(--accent); font-weight: 400; }
+
+.mos-container {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* The Azure spark accent — e.g. a dot or the logo sparkle color */
+.mos-spark { color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

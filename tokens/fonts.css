@@ -1,0 +1,15 @@
+/* ============================================================
+   MostAI — Webfonts
+   ------------------------------------------------------------
+   The brand's three voices, loaded from Google Fonts:
+
+     · Michroma → display / logo wordmark (wide, techy; rare)
+     · Exo 2    → headlines & buttons (geometric, futuristic)
+     · Inter    → body & UI (built for screens)
+
+   These are the brand's actual chosen typefaces (Brand
+   Foundation v1.1). Self-contained @font-face rules live in
+   the imported Google sheet.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Michroma&family=Exo+2:wght@400;500;600;700;800&family=Inter:wght@400;450;500;600;700&display=swap");
