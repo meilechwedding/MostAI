@@ -200,7 +200,7 @@
    Overview cards (What we do)
    ============================================================ */
 .svc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 60px; }
-.svc-card { position: relative; display: flex; flex-direction: column; border-radius: 26px; overflow: hidden;
+.svc-card { position: relative; display: flex; flex-direction: column; border-radius: var(--r-card); overflow: hidden;
   background: var(--white); border: 1px solid var(--border); text-decoration: none; color: inherit;
   box-shadow: 0 1px 2px rgba(10,30,60,.03);
   transition: transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s, border-color .4s; }
@@ -247,7 +247,7 @@
 .ink__card {
   position: relative;
   padding: clamp(44px, 6vw, 72px) clamp(28px, 5vw, 60px);
-  border-radius: 32px;
+  border-radius: var(--r-card);
   background: rgba(12, 16, 28, .44);                 /* proper frosted glass — was multiplied to ~14% by Tweaks --glass:0.4 */
   backdrop-filter: blur(28px) saturate(170%);
   -webkit-backdrop-filter: blur(28px) saturate(170%);
@@ -303,7 +303,7 @@
 .svc-mast h1 { margin-top: 14px; }
 .svc-mast__side .svc-hero__lead { margin-top: 0; }
 .svc-hero__cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
-.svc-frame { position: relative; border-radius: 24px; overflow: hidden;
+.svc-frame { position: relative; border-radius: var(--r-card); overflow: hidden;
   box-shadow: 0 50px 120px -50px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08), inset 0 1px 0 rgba(255,255,255,.12); }
 .svc-frame [data-preview] { border-radius: 0; border: none; }
 .svc-stack { display: grid; gap: 14px; margin-top: 34px; }
@@ -314,8 +314,8 @@
 
 /* In-sheet detail blocks */
 .svc-points { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 56px; }
-.svc-point { padding: 30px 26px; border-radius: 20px; background: var(--tint); border: 1px solid var(--border-faint); }
-.svc-point__ic { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; margin-bottom: 16px;
+.svc-point { padding: 30px 26px; border-radius: var(--r-card); background: var(--tint); border: 1px solid var(--border-faint); }
+.svc-point__ic { width: 46px; height: 46px; border-radius: var(--r-tile); display: grid; place-items: center; margin-bottom: 16px;
   background: rgba(10,132,255,.08); border: 1px solid var(--accent-border); color: var(--site-accent-d); }
 .svc-point__ic svg { width: 22px; height: 22px; }
 .svc-point h4 { font-family: var(--font-head); font-weight: 600; font-size: var(--text-md); margin: 0 0 8px; }
