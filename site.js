@@ -492,10 +492,10 @@
         .then(function (r) { return r.json(); })
         .then(function (res) {
           if (res && res.success) { showFormSuccess(); }
-          else { showFormError("Couldn't send — please email elimelechmoster@gmail.com directly."); if (btn) btn.disabled = false; }
+          else { showFormError("Couldn't send right now — please try again in a moment."); if (btn) btn.disabled = false; }
         })
         .catch(function () {
-          showFormError("Network error — please email elimelechmoster@gmail.com directly."); if (btn) btn.disabled = false;
+          showFormError("Network error — please try again in a moment."); if (btn) btn.disabled = false;
         });
     });
   }

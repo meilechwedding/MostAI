@@ -1,5 +1,5 @@
 # dev / OS artifacts
-screenshots/
+/screenshots/
 .claude/
 .DS_Store
 Thumbs.db
